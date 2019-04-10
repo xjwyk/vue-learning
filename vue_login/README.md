@@ -1,6 +1,6 @@
 # vue-learning
 
-![](https://img.shields.io/badge/language-vue3.0-brightgreen.svg?style=plastic)
+![](https://img.shields.io/badge/vue-2.6.6-brightgreen.svg?style=plastic)![](https://img.shields.io/badge/vuex-3.1.0-brightgreen.svg?style=plastic)![](https://img.shields.io/badge/axios-0.18.0-brightgreen.svg?style=plastic)![](https://img.shields.io/badge/elemet-3.1.0-brightgreen.svg?style=plastic)
 
 ### vue_login
 
