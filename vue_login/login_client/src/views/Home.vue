@@ -2,7 +2,9 @@
   <el-container class="home">
     <Header></Header>
     <el-container class="container" style="margin-right: 0px">
-      <Aside></Aside>
+      <el-aside class="aside">
+        <Aside></Aside>
+      </el-aside>
       <Main></Main>
     </el-container>
   </el-container>
@@ -24,7 +26,17 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+body {
+  min-width: 1000px;
+}
+.home {
+  .el-container {
+    height: 500px;
+    .aside {
+      max-width: 230px;
+    } 
+  }
+}
 </style>
 

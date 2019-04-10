@@ -3,10 +3,8 @@
     <el-col :span="24" class="header">
       <el-col
         :span="10"
-        class="logo"
-        :class="collapsed ? 'logo-collapse-width' : 'logon-width'"
-      >
-        {{ collapsed ? "" : logo }}
+        class="logo">
+        {{ collapsed ? "😁🤭" : logo }}
       </el-col>
       <el-col :span="10">
         <div class="tools" @click.prevent="collapse">
@@ -57,10 +55,9 @@ export default {
         })
         .catch(() => {});
     },
-    // 折叠导航栏
+    // 切换logon
     collapse() {
       this.collapsed = !this.collapsed;
-      this.$store.dispatch('setCollapsed', this.collapsed);
     }
   },
   mounted() {
@@ -80,6 +77,7 @@ export default {
   top: 0px;
   bottom: 0px;
   width: 100%;
+  min-width: 1000px;
   .header {
     height: 60px;
     line-height: 60px;
@@ -96,7 +94,7 @@ export default {
           width: 40px;
           height: 40px;
           border-radius: 20px;
-          margin: 10px 0px 10px 10px;
+          margin: 16px 0px 0px 10px;
           float: right;
         }
       }
@@ -121,9 +119,6 @@ export default {
     }
     .logo-width {
       width: 230px;
-    }
-    .logo-collapse-width {
-      width: 60px;
     }
     .tools {
       padding: 0px 23px;

@@ -1,34 +1,59 @@
 <template>
-  <el-container>
-    <el-main>
-      <el-table :data="tableData">
-        <el-table-column prop="date" label="日期" width="140">
-        </el-table-column>
-        <el-table-column prop="name" label="姓名" width="120">
-        </el-table-column>
-        <el-table-column prop="address" label="地址">
-        </el-table-column>
-      </el-table>
-    </el-main>
-  </el-container>
+  <section class="content-container">
+    <div class="grid-content bg-purple-light">
+      <el-col :span="24" class="breadcrumb-container">
+        <el-breadcrumb separator="/" class="breadcrumb-inner">
+          <el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
+            {{ item.name }}
+          </el-breadcrumb-item>
+        </el-breadcrumb>
+      </el-col>
+      <el-col :span="24" class="content-wrapper">
+        <transition name="fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
+      </el-col>
+    </div>
+  </section>
 </template>
 
 <script>
 export default {
   name: "Main",
   data() {
-    const item = {
-      date: '2016-05-02',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    };
     return {
-      tableData: Array(5).fill(item)
-    };
-  },
+      
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-
+.content-container {
+  background: #f1f2f7;
+  flex:1;
+  position: absolute;
+  right: 0px;
+  top: 60px;
+  bottom: 0px;
+  left: 230px;
+  overflow-y: scroll;
+  min-width: 800px;
+  padding: 20px;
+  .breadcrumb-container {
+    margin-bottom: 15px;
+    .title {
+      width: 200px;
+      float: left;
+      color: #475669;
+    }
+    .breadcrumb-inner {
+      float: right;
+    }
+  }
+  .content-wrapper {
+    background-color: #fff;
+    box-sizing: border-box;
+  }
+}
 </style>

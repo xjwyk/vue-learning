@@ -132,7 +132,7 @@ export default {
     // 主页
     gotoHome() {
       this.$router.push({
-        path: "/"
+        path: "/table"
       });
     },
     // 验证用户名

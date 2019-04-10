@@ -30,7 +30,7 @@ export default new Vuex.Store({
     deleteUser ({ commit }) {
       commit('deleteUser');
     },
-    setCollapsed ({ commit }, collapsed) {
+    setCollapsedAction ({ commit }, collapsed) {
       commit('setCollapsed', collapsed);
     }
   }
