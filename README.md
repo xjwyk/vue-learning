@@ -1,6 +1,6 @@
 # vue-learning
 
-![](https://img.shields.io/badge/language-vue3.0-brightgreen.svg?style=plastic)
+![](https://img.shields.io/badge/vue-2.0-brightgreen.svg?style=plastic)![](https://img.shields.io/badge/vuecli-3.0-brightgreen.svg?style=plastic)
 
 ## some vue demo
 
