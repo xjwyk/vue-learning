@@ -4,7 +4,10 @@ import router from './router';
 import store from './store/store';
 import VueLazyload from 'vue-lazyload';
 import axios from 'axios';
+import fastClick from 'fastclick';
 import 'font-awesome/css/font-awesome.min.css';
+ 
+fastClick.attach(document.body);
 
 Vue.config.productionTip = false;
 const axiosConfig = {

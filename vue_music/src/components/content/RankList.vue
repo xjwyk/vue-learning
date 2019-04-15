@@ -61,7 +61,9 @@ export default {
   methods: {
     setId(id) {
       this.$store.commit('setSheetId', id);
-      this.$router.push('/detail');
+      this.$router.push({
+        path: `/rank/detail/${id}`
+      });
     }
   },
   mounted () {

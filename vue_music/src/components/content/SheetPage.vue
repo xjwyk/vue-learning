@@ -5,7 +5,7 @@
            alt="">
     </div>
     <div class="songList">
-      <ul>
+      <ul class="songTitle">
         <li class="songitem"
             v-for="(item, index) in this.songs"
             :key="index"
@@ -37,14 +37,10 @@ export default {
       this.$store.commit('setMusicId', id);
       this.play = !this.play;
       this.$store.commit('setPlay', this.play);
-      /* eslint-disable no-console */
-      console.log(id);
     }
   },
   mounted () {
     this.id = this.$store.state.sheetId;
-    
-    console.log(this.id);
     let str = '/playlist/detail?id=' + this.id;
     this.$axios
       .get(str)
@@ -52,7 +48,11 @@ export default {
       .then(data => {
         this.imgUrl = data.playlist.coverImgUrl;
         this.songs = data.playlist.tracks;
-        console.log(this.songs[0]);
+        let list = [];
+        for (var i = 0; i < data.playlist.tracks.length; ++i) {
+          list[i] = data.playlist.tracks[i].id;
+        }
+        this.$store.commit('setList', list);
       })
   },
 }
@@ -66,6 +66,11 @@ export default {
 .cover > img {
   height: 100%;
   width: 100%;
+  border-radius: 10px;
+}
+
+.songTitle {
+  border-radius: 5px; 
 }
 
 .songitem {

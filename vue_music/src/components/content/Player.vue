@@ -1,110 +1,136 @@
 <template>
   <div>
     <div class="musicplayer">
-      <img :src="this.imgUrl"
-           alt="">
-      <div class="right">
-        <div class="text">
-          <p>{{ this.title }}</p>
-          <p>{{ this.singer }}</p>
+      <div class="left"
+           @click="goPlayPage">
+        <div class="img">
+          <img :src="this.song.imgUrl"
+               alt="">
+          <span class="name">{{ this.song.name }}</span>
+          <span class="singer">{{ this.song.singer }}</span>
         </div>
-        <i class="fa  fa-lg playbtn"
-           :class="{'fa-play': !this.play, 'fa-pause': this.play}"
-           @click="changePlay"
-           aria-hidden="true">
-          <audio ref="audio"
-                 id="song"
-                 :src="this.url"></audio>
-        </i>
       </div>
+      <div class="circle"
+           @click="Play">
+        <van-circle v-model="currentTime"
+                    color="#07c160"
+                    fill="#fff"
+                    size="40px"
+                    layer-color="#ebedf0"
+                    :stroke-width="30">
+          <i class="fa  fa-lg playbtn"
+             :class="{'fa-play': !this.play, 'fa-pause': this.play}"
+             aria-hidden="true">
+            <audio ref="audio"
+                   id="song"
+                   @canplay="getDuration"
+                   loop="loop"
+                   :src="this.song.url"></audio>
+          </i>
+        </van-circle>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
-import { Toast } from 'vant';
+import { Toast, Circle } from 'vant';
+import axios from 'axios';
 export default {
   name: 'Player',
   data () {
     return {
       play: false,
+      isLoading: true,
       id: '',
-      imgUrl: require('../../assets/logo.png'),
-      singer: '歌手',
-      title: '歌名',
-      url: ''
+      song: {
+        imgUrl: '',
+        name: '',
+        singer: '',
+        url: ''
+      },
+      list: [],
+      currentTime: 0
     }
   },
   components: {
-    [Toast.name]: Toast
+    [Toast.name]: Toast,
+    [Circle.name]: Circle
   },
   methods: {
-    changePlay () {
-      this.id = this.$store.state.musicId;
+    async Play () {
       /* eslint-disable no-console */
-      if (this.id !== null) {
-        this.$axios
-          .get('/check/music?id=' + this.id)
-          .then(res => {
-            console.log(res.data.success);
-            if (res.data.success) {
-              this.getUrl(this.id);
-              this.getDetail(this.id);
+      this.id = this.$store.state.musicId;
+      let id = this.id;
+      let res = await this.checkUrl(id);
+      if (res.data.success) {
+        await axios.all([this.getUrl(id), this.getDetail(id)])
+          .then(axios.spread((url, detail) => {
+            let song = {
+              imgUrl: detail.data.songs[0].al.picUrl,
+              name: detail.data.songs[0].name,
+              singer: detail.data.songs[0].ar[0].name,
+              url: url.data.data[0].url
             }
-          }).catch(() => {
-            this.$toast("对不起，暂无版权！");
-          });
-      }
-    },
-    getUrl (id) {
-      let player = document.getElementById('song');
-      this.$axios
-        .get('/song/url?id=' + id)
-        .then(res => res.data)
-        .then(data => {
-          this.url = data.data[0].url;
-          if (player !== null) {
             if (this.play) {
-              player.pause();
-              player.src = '';
+              this.$refs.audio.pause();
+              this.$refs.audio.src = '';
               this.play = false;
             } else {
-              player.src = this.url;
-              player.load();
+              this.$refs.audio.src = song.url;
+              this.$refs.audio.load();
               this.$nextTick(function () {
-                player.play();
+                this.$refs.audio.play();
                 this.play = true;
+                console.log('updated');
               });
-              this.$store.state.play = this.play;
             }
-          }
-        });
-
-
+            this.$store.commit('setSong', song);
+            this.song = this.$store.state.song;
+            this.$store.state.play = this.play;
+          }));
+      } else {
+        this.$toast("对不起，暂无版权！");
+      }
+    },
+    checkUrl (id) {
+      return this.$axios.get('/check/music?id=' + id);
+    },
+    getUrl (id) {
+      return this.$axios.get('/song/url?id=' + id);
     },
     getDetail (id) {
-      this.$axios
-        .get('/song/detail?ids=' + id)
-        .then(res => res.data)
-        .then(data => {
-          this.title = data.songs[0].name;
-          this.singer = data.songs[0].ar[0].name;
-          this.imgUrl = data.songs[0].al.picUrl;
-        });
+      return this.$axios.get('/song/detail?ids=' + id);
+    },
+    goPlayPage () {
+      this.$router.push('/play')
+    },
+    getDuration() {
+       console.log(this.$refs.audio.duration);
+       this.duration = this.$refs.audio.duration;
     }
   },
   computed: {
     isPlay () {
       return this.$store.state.play;
+    },
+    idChange () {
+      return this.$store.state.id;
+    },
+    getList () {
+      return this.$store.state.list;
     }
+  },
+  mounted () {
+    this.song = this.$store.state.song;
+    this.play = this.$store.state.play;
   },
   watch: {
     isPlay: {
       handler (newVal) {
-        this.$nextTick(function () {
-          this.play = newVal;
-          this.changePlay();
-        });
+        this.Play();
+        this.play = newVal;
       },
       deep: true
     }
@@ -116,33 +142,49 @@ export default {
 .musicplayer {
   bottom: 0;
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   position: fixed;
   width: 100%;
   height: 60px;
   background: #eee;
 }
 
-.musicplayer > img {
+.left {
+  width: 85%;
+}
+
+.img > img {
   width: 50px;
   height: 50px;
   margin: 5px;
+  float: left;
 }
 
-.right {
-  width: 75%;
-  height: 60px;
-  display: flex;
+.name {
+  padding-top: 10px;
+  padding-left: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  width: 80%;
+  float: left;
 }
 
-.text {
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+.singer {
+  padding-top: 10px;
+  padding-left: 10px;
+  font-size: 12px;
+  width: 80%;
+}
+
+.circle {
+  margin-top: 10px;
 }
 
 .playbtn {
   position: relative;
-  top: 40%;
+  left: 3%;
+  top: 30%;
 }
 </style>

@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <keep-alive include="Player">
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 

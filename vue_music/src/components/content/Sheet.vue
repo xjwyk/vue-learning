@@ -28,7 +28,9 @@ export default {
   methods: {
     setId(id) {
       this.$store.commit('setSheetId', id);
-      this.$router.push('/detail');
+      this.$router.push({
+        path: `/recommend/detail/${id}`
+      });
     }
   },
   mounted () {
@@ -62,6 +64,7 @@ export default {
 .sheet_item > img {
   width: 100%;
   height: auto;
+  border-radius: 5px; 
 }
 
 .sheet_item > span {

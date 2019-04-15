@@ -25,12 +25,8 @@ npm run test
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-
-
-##### 暂时只有一些界面以及基本的播放，不过还存在数据的预加载问题需要改进
-
 ##### 音乐的api接口是采用了NeteaseCloudMusicApi获取了网易云的一些数据
 
+
+
+##### 只实现了基本播放、排行榜、推荐歌单、搜索的功能，内部还有很多的坑需要填，orz...
