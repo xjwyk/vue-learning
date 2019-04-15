@@ -25,3 +25,9 @@
 ##### login_server ---- (login && register completed)
 
 ##### login_client ---- starting
+
+### day4
+
+#### vue_learning demo
+
+#### 给自己挖的坑，orz...
