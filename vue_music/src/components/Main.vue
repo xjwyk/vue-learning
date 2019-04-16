@@ -11,7 +11,6 @@
           <Sheet></Sheet>
         </van-tab>
       </van-tabs>
-      <Player></Player>
     </div>
   </div>
 </template>
@@ -21,7 +20,6 @@ import { Tabs, Tab } from 'vant';
 import Banner from './content/Banners';
 import RankList from './content/RankList';
 import Sheet from './content/Sheet';
-import Player from './content/Player';
 export default {
   name: "Main",
   data () {
@@ -34,8 +32,7 @@ export default {
     [Tab.name]: Tab,
     Banner,
     RankList,
-    Sheet,
-    Player
+    Sheet
   },
   methods: {
     onClick(index) {

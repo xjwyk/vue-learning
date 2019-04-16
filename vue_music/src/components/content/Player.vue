@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div class="musicplayer">
+    <div class="miniplayer">
       <div class="left"
-           @click="goPlayPage">
+           @click="goPlayPage"
+           v-if="mini">
         <div class="img">
           <img :src="this.song.imgUrl"
                alt="">
@@ -10,7 +11,7 @@
           <span class="singer">{{ this.song.singer }}</span>
         </div>
       </div>
-      <div class="circle"
+      <div :class="{'circle': this.mini, 'page': !this.mini}"
            @click="Play">
         <van-circle v-model="currentTime"
                     color="#07c160"
@@ -18,18 +19,30 @@
                     size="40px"
                     layer-color="#ebedf0"
                     :stroke-width="30">
-          <i class="fa  fa-lg playbtn"
-             :class="{'fa-play': !this.play, 'fa-pause': this.play}"
+          <i class="fa  fa-lg"
+             :class="{'fa-play': !this.play, 
+                      'fa-pause': this.play,
+                      'playbtn': this.mini,
+                      'play-btn': !this.mini}"
              aria-hidden="true">
             <audio ref="audio"
                    id="song"
                    @canplay="getDuration"
                    loop="loop"
-                   :src="this.song.url"></audio>
+                   :src="this.song.url" />
           </i>
         </van-circle>
       </div>
 
+    </div>
+    <div class="playPage"
+         v-if="!mini">
+      <div class="player">
+        <img :src="this.song.imgUrl"
+             ref="rotate"
+             alt="">
+      </div>
+      <div class="lyric"></div>
     </div>
   </div>
 </template>
@@ -42,7 +55,7 @@ export default {
   data () {
     return {
       play: false,
-      isLoading: true,
+      mini: true,
       id: '',
       song: {
         imgUrl: '',
@@ -77,12 +90,18 @@ export default {
               this.$refs.audio.pause();
               this.$refs.audio.src = '';
               this.play = false;
+              if (!this.mini) {
+                this.$refs.rotate.style.animationPlayState = 'paused';
+              }
             } else {
               this.$refs.audio.src = song.url;
               this.$refs.audio.load();
               this.$nextTick(function () {
                 this.$refs.audio.play();
                 this.play = true;
+                if (!this.mini) {
+                  this.$refs.rotate.style.animationPlayState = 'running';
+                }
                 console.log('updated');
               });
             }
@@ -104,11 +123,15 @@ export default {
       return this.$axios.get('/song/detail?ids=' + id);
     },
     goPlayPage () {
-      this.$router.push('/play')
+      this.mini = false;
+      this.$store.commit('setMini', this.mini);
+      // eslint-disable-next-line no-console
+      console.log(this.mini);
+      this.$router.push('/play');
     },
-    getDuration() {
-       console.log(this.$refs.audio.duration);
-       this.duration = this.$refs.audio.duration;
+    getDuration () {
+      console.log(this.$refs.audio.duration);
+      this.duration = this.$refs.audio.duration;
     }
   },
   computed: {
@@ -120,11 +143,27 @@ export default {
     },
     getList () {
       return this.$store.state.list;
+    },
+    getMini () {
+      return this.$store.state.mini;
+    },
+    getSong () {
+      return this.$store.state.song;
     }
   },
   mounted () {
     this.song = this.$store.state.song;
     this.play = this.$store.state.play;
+    this.mini = this.$store.state.mini;
+    if (!this.mini) {
+      if (this.play) {
+        this.$refs.rotate.style.animationPlayState = 'paused';
+      } else {
+        this.$refs.rotate.style.animationPlayState = 'running';
+      }
+    }
+    // eslint-disable-next-line no-console
+    console.log(this.mini);
   },
   watch: {
     isPlay: {
@@ -133,13 +172,23 @@ export default {
         this.play = newVal;
       },
       deep: true
+    },
+    getMini: {
+      handler (newVal) {
+        this.mini = newVal;
+      }
+    },
+    getSong: {
+      handler (newVal) {
+        this.song = newVal;
+      }
     }
   },
 }
 </script>
 
 <style scoped>
-.musicplayer {
+.miniplayer {
   bottom: 0;
   display: flex;
   flex-direction: row;
@@ -186,5 +235,67 @@ export default {
   position: relative;
   left: 3%;
   top: 30%;
+}
+
+.playPage {
+  height: 100%;
+}
+
+.player {
+  margin: 0 auto;
+  margin-top: 30%;
+  width: 15em;
+  height: 15em;
+  border-radius: 240px;
+  transform: rotate(45deg);
+  border: 2px solid #131313;
+  box-shadow: 0 0 0 30px #343935;
+  opacity: 0.7;
+}
+
+.player > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+  transform: translate(-50%, -50%) rotate(0deg);
+  width: 240px;
+  height: 240px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 2px solid #000;
+  border-radius: 200px;
+  animation: animations1 10s linear infinite forwards;
+  animation-play-state: paused;
+}
+
+@keyframes animations1 {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.lyric {
+  height: 250px;
+}
+
+.page {
+  margin-left: 45%;
+  margin-top: 10px;
+}
+
+.play-btn {
+  position: relative;
+  left: 3%;
+  top: 26%;
 }
 </style>

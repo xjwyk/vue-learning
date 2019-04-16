@@ -14,7 +14,8 @@ export default new Vuex.Store({
     },
     list:[],
     sheetId: '',
-    play: false
+    play: false,
+    mini: true
   },
   mutations: {
     setMusicId(state, musicId) {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     setList(state, list) {
       state.list = list;
+    },
+    setMini(state, mini) {
+      state.mini = mini;
     }
   },
   actions: {
@@ -45,8 +49,12 @@ export default new Vuex.Store({
     },
     setSong(context, song) {
       context.commit('setSong', song);
-    }, setList(context, list) {
+    }, 
+    setList(context, list) {
       context.commit('setList', list);
+    },
+    setMini(context, mini) {
+      context.commit('setMini', mini);
     }
   }
 });

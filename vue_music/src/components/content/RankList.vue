@@ -140,8 +140,15 @@ export default {
 }
 
 .detail > span {
+  display: block;
   margin-top: 15px;
   font-size: 12px;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .rankListItem_recommend {

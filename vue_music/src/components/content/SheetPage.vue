@@ -33,10 +33,15 @@ export default {
     }
   },
   methods: {
-    setId(id) {
+    setId (id) {
       this.$store.commit('setMusicId', id);
-      this.play = !this.play;
+      // eslint-disable-next-line no-console
+      console.log(id);
+      this.play = true;
+      let mini = false;
+      this.$store.commit('setMini', mini);
       this.$store.commit('setPlay', this.play);
+      this.$router.push('/play');
     }
   },
   mounted () {
@@ -70,7 +75,7 @@ export default {
 }
 
 .songTitle {
-  border-radius: 5px; 
+  border-radius: 5px;
 }
 
 .songitem {
@@ -90,11 +95,24 @@ export default {
 }
 
 .song > div {
-  margin-top:10px;
+  margin-top: 10px;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .song > span {
+  display: block;
   font-size: 12px;
   color: #aaa;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 </style>

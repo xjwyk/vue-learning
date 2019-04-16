@@ -3,15 +3,16 @@
     <keep-alive include="Player">
       <router-view></router-view>
     </keep-alive>
+    <Player></Player>
   </div>
 </template>
 
 <script>
-
+import Player from './components/content/Player';
 export default {
   name: 'app',
   components: {
-
+    Player
   }
 }
 </script>
@@ -25,4 +26,10 @@ export default {
   width: 100%;
 }
 
+html,
+body,
+#app {
+  height: 100%;
+  width: 414px;
+}
 </style>

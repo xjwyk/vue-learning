@@ -16,14 +16,17 @@
         {{hot.first}}
       </span>
     </div>
-    <div class="results" v-if="search">
+    <div class="results"
+         v-if="search">
       <ul>
         <li class="resultitem"
             v-for="(item, index) in this.results"
+            @click="setId(item.id)"
             :key="index">
           <div class="index">{{ index+1 }}</div>
           <div class="result">
-            <div>{{ item.name }}</div>
+            <span class="song-name">{{ item.name }}</span>
+            <span class="artist-name">{{ item.artists[0].name }}</span>
           </div>
         </li>
       </ul>
@@ -64,6 +67,11 @@ export default {
     },
     onCancel () {
       this.$router.go(-1);
+    },
+    setId (id) {
+      this.$store.commit('setMusicId', id);
+      this.play = !this.play;
+      this.$store.commit('setPlay', this.play);
     }
   },
   mounted () {
@@ -109,12 +117,38 @@ export default {
 }
 
 .index {
+  margin-left: 5px;
   line-height: 50px;
 }
 
 .result {
-  margin-left: 10px;
-  line-height: 50px;
+  margin-left: 20px;
 }
 
+.result > span {
+  width: 100%;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.song-name {
+  margin-top: 5px;
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: bold;
+}
+
+.artist-name {
+  font-size: 12px;
+  line-height: 20px;
+  color: #aaa;
+}
+
+.results {
+  margin-bottom: 65px;
+}
 </style>
