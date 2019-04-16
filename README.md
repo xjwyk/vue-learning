@@ -1,6 +1,6 @@
 # vue-learning
 
-![](https://img.shields.io/badge/vue-2.0-brightgreen.svg?style=plastic)![](https://img.shields.io/badge/vuecli-3.0-brightgreen.svg?style=plastic)
+![](https://img.shields.io/badge/vue-2.6-brightgreen.svg?style=plastic)![](https://img.shields.io/badge/vuecli-3.0-brightgreen.svg?style=plastic)
 
 ## some vue demo
 
@@ -31,3 +31,5 @@
 #### vue_learning demo
 
 #### 给自己挖的坑，orz...
+
+##### 日常填坑，慢慢完善中...
