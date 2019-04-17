@@ -55,8 +55,6 @@ export default {
         .get('/search?keywords=' + this.value)
         .then(res => res.data)
         .then(data => {
-          // eslint-disable-next-line no-console
-          console.log(data.result.songs);
           this.results = data.result.songs;
           this.search = true;
         });
@@ -79,8 +77,6 @@ export default {
       .get('/search/hot')
       .then(res => res.data)
       .then(data => {
-        // eslint-disable-next-line no-console
-        console.log(data.result.hots);
         this.hots = data.result.hots;
       });
   },

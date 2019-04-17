@@ -2,7 +2,11 @@
   <div class="main">
     <div class="tabs">
       <van-tabs v-model="active"
-                @click="onClick">
+                @click="onClick"
+                :animated="true"
+                :sticky="true"
+                :offset-top="60"
+                swipeable>
         <van-tab title="排行榜">
           <RankList></RankList>
         </van-tab>

@@ -37,4 +37,12 @@ export default {
   width: 100%;
   top: 0;
 }
+
+.van-nav-bar .van-nav-bar__right {
+  height: 55px;
+}
+
+.van-search {
+  height: 60px;
+}
 </style>

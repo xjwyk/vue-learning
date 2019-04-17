@@ -5,12 +5,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    musicId: '400162138',
+    musicId: '',
     song: {
-      imgUrl: 'https://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg',
-      name: '海阔天空',
-      singer: 'Beyond',
-      url: 'http://m10.music.126.net/20190415142058/d0cdb07c25e5d1e1a6a09f3a049a313d/ymusic/603f/2799/ea87/0ac26d0e219c049b2c5a12fd6be2826f.mp3'
+      imgUrl: require('../common/pic/lb.jpg'),
+      name: '男孩',
+      singer: '梁博',
+      url: require('../common/music/男孩-梁博.mp3')
     },
     list:[],
     sheetId: '',
@@ -35,6 +35,9 @@ export default new Vuex.Store({
     },
     setMini(state, mini) {
       state.mini = mini;
+    },
+    setName(state, name) {
+      state.song.name = name;
     }
   },
   actions: {
@@ -55,6 +58,9 @@ export default new Vuex.Store({
     },
     setMini(context, mini) {
       context.commit('setMini', mini);
+    },
+    setName(context, name) {
+      context.commit('setName', name);
     }
   }
 });

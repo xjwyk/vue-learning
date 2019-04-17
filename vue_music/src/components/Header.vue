@@ -33,11 +33,13 @@ export default {
 <style>
 .nav-bar {
   position: fixed;
+  z-index: 1;
   top:0;
   width: 100%;
   height: 60px;
   background: #41b883;
   text-align: center;
+  max-width: 414px;
 }
 
 .nav-bar .van-nav-bar__title {

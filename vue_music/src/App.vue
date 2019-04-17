@@ -31,5 +31,12 @@ body,
 #app {
   height: 100%;
   width: 414px;
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  overflow:scroll;
+  top: 0;
+  left: 0;
+  bottom: 0;
 }
 </style>

@@ -9,7 +9,7 @@
         <li class="songitem"
             v-for="(item, index) in this.songs"
             :key="index"
-            @click="setId(item.id)">
+            @click="setId(item)">
           <div class="index">{{ index+1 }}</div>
           <div class="song">
             <div>{{ item.name }}</div>
@@ -33,14 +33,13 @@ export default {
     }
   },
   methods: {
-    setId (id) {
-      this.$store.commit('setMusicId', id);
-      // eslint-disable-next-line no-console
-      console.log(id);
+    setId (item) {
+      this.$store.commit('setMusicId', item.id);
       this.play = true;
       let mini = false;
       this.$store.commit('setMini', mini);
       this.$store.commit('setPlay', this.play);
+      this.$store.commit('setName', item.name);
       this.$router.push('/play');
     }
   },
@@ -76,6 +75,10 @@ export default {
 
 .songTitle {
   border-radius: 5px;
+}
+
+.songList {
+  margin-bottom: 62px;
 }
 
 .songitem {
@@ -115,4 +118,5 @@ export default {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 }
+
 </style>

@@ -13,6 +13,7 @@
     "core-js": "^2.6.5",
     "fastclick": "^1.0.6",
     "font-awesome": "^4.7.0",
+    "lyric-parser": "^1.0.1",
     "vant": "^1.6.13",
     "vue": "^2.6.6",
     "vue-lazyload": "^1.2.6",
