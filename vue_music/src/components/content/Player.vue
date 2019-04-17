@@ -207,6 +207,14 @@ export default {
       handler (newVal) {
         this.song = newVal;
       }
+    },
+    currentTime: {
+      handler(newVal) {
+        if (newVal === this.durationTime) {
+          console.log("finish");
+          this.currentLyric.seek(0);
+        }
+      }
     }
   }
 }
