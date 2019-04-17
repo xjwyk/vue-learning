@@ -1,6 +1,7 @@
 <template>
   <van-nav-bar :left-text="name"
                left-arrow
+               class="head"
                @click-left="onClickLeft">
   </van-nav-bar>
 </template>
@@ -9,7 +10,7 @@
 import { NavBar } from 'vant';
 export default {
   name: 'Play',
-  data() {
+  data () {
     return {
       name: '',
       mini: false
@@ -19,15 +20,13 @@ export default {
     [NavBar.name]: NavBar
   },
   methods: {
-    onClickLeft() {
+    onClickLeft () {
       this.mini = !this.mini;
       this.$store.commit('setMini', this.mini);
-      // eslint-disable-next-line no-console
-      console.log(this.mini);
       this.$router.go(-1);
     }
   },
-  mounted() {
+  mounted () {
     this.name = this.$store.state.song.name;
     this.mini = this.$store.state.mini;
   }
@@ -35,4 +34,13 @@ export default {
 </script>
 
 <style scoped>
+.head {
+  background: linear-gradient(91deg, #f1eefc, #41b883 70%, #a5bcff);
+  font-size: 16px;
+  height: 7%;
+}
+
+.van-nav-bar__text {
+  color: rgba(8, 0, 0, 0.5);
+}
 </style>
