@@ -28,6 +28,8 @@
 
 ### day4
 
+##### ![](https://img.shields.io/badge/vant-ui-brightgreen.svg?style=plastic)
+
 #### vue_learning demo
 
 #### 给自己挖的坑，orz...
