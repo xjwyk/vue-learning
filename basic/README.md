@@ -1,8 +1,6 @@
 ## BASIC
 
-1. ------
-
-   [CSS3](./css/css3.md)
+1. [CSS3](./css/css3.md)
 
 2. [CSS编码规范](./css/css编码规范.md)
 
