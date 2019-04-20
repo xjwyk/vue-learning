@@ -15,16 +15,16 @@
 <div class="sl">
   <div class="layout-s">
 
-​	<div class="red tl">头部</div>
-​	<div class="green ct">内容</div>
-​	<div class="red tl">尾部</div>
+  <div class="red tl">头部</div>
+  <div class="green ct">内容</div>
+	<div class="red tl">尾部</div>
 
   </div>
   <div class="layout-d">
 
-​	<div class="red tl">头部</div>
-​	<div class="green ct">内容</div>
-​	<div class="red tl">尾部</div>
+	<div class="red tl">头部</div>
+	<div class="green ct">内容</div>
+  <div class="red tl">尾部</div>
 
   </div>
 </div>
@@ -113,38 +113,28 @@
 </div>
 
 <style>
-  .cl {
-
-​	width: 600px;
-​	color: #fff;
-​	text-align: center;
-​	padding: 10px 5px 5px 10px;
-​	border: 1px solid #ddd;
-​	margin: 30px 0;
-
-  }
-  .row {
-
-​	display: flex;
-​	flex-direction: row;
-
-  }
-  .row span {
-
-​	padding: 10px;
-​	margin: 0 5px 5px 0;
-
-  }
-  .c33 {
-
-​	width: 33%
-
-  }
-  .c66 {
-
-​	width: 66%
-
-  }
+.cl {
+	width: 600px;
+	color: #fff;
+	text-align: center;
+	padding: 10px 5px 5px 10px;
+	border: 1px solid #ddd;
+  margin: 30px 0;
+}
+.row {
+	display: flex;
+	flex-direction: row;
+}
+.row span {
+	padding: 10px;
+	margin: 0 5px 5px 0;
+}
+.c33 {
+  width: 33%
+}
+.c66 {
+	width: 66%
+}
 </style>
 
 **A.  float+margin**
