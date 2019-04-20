@@ -12,53 +12,6 @@
 
   <img src="../img/single-col.png">
 
-<div class="sl">
-  <div class="layout-s">
-
-​	<div class="red tl">头部</div>
-​	<div class="green ct">内容</div>
-​	<div class="red tl">尾部</div>
-
-  </div>
-  <div class="layout-d">
-
-​	<div class="red tl">头部</div>
-​	<div class="green ct">内容</div>
-​	<div class="red tl">尾部</div>
-
-  </div>
-</div>
-<style>
-.sl{
-  display: flex;
-  flex-direction: row;
-  width: 600px;
-  text-align: center;
-  color: #fff;
-  margin: 30px auto;
-}
-.sl .layout-s,.sl .layout-d {
-  width: 200px;
-  margin-right: 20px;
-}
-.tl {
-  padding: 5px;
-}
-.ct {
-  height: 100px;
-}
-.red {
-  background: #996600;
-}
-.green {
-  background: #33cc66
-}
-.layout-d .ct {
-  width: 100px;
-  margin: 0 auto;
-}
-</style>
-
 **等宽布局**
 
 ```html
@@ -97,55 +50,14 @@
 }
 ```
 
-###  二列&三列布局
+### 二列&三列布局
 
 - 二列布局的特征是侧栏固定宽度，主栏自适应宽度。
 - 三列布局的特征是两侧两列固定宽度，中间列自适应宽度。
 
 > 二列布局可以看做去掉一个侧栏的三列布局，其布局的思想有异曲同工之妙。对于传统的实现方法，主要讨论下面前三种布局，经典的带有侧栏的二栏布局以及带有左右侧栏的三栏布局，对于flex布局，实现了下面的五种布局。
 
-<div class="cl">
-  <div class="row"><span class="c33 red">SIDE [width fixed]</span><span class="c66 green">MAIN [width adapt]</span></div>
-  <div class="row"><span class="c66 green">MAIN [width adapt]</span><span class="c33 red">SIDE [width fixed]</span></div>
-  <div class="row"><span class="c33 red">LEFT [width fixed]</span><span class="c33 green">MAIN [width adapt]</span><span class="c33 red">RIGHT [width fixed]</span></div>
-  <div class="row"><span class="c33 red">SIDE1 [width fixed]</span><span class="c33 red">SIDE2 [width fixed]</span><span class="c33 green">MAIN [width adapt]</span></div>
-  <div class="row"><span class="c33 green">MAIN [width adapt]</span><span class="c33 red">SIDE1 [width fixed]</span><span class="c33 red">SIDE2 [width fixed]</span></div>
-</div>
-
-<style>
-  .cl {
-
-​	width: 600px;
-​	color: #fff;
-​	text-align: center;
-​	padding: 10px 5px 5px 10px;
-​	border: 1px solid #ddd;
-​	margin: 30px 0;
-
-  }
-  .row {
-
-​	display: flex;
-​	flex-direction: row;
-
-  }
-  .row span {
-
-​	padding: 10px;
-​	margin: 0 5px 5px 0;
-
-  }
-  .c33 {
-
-​	width: 33%
-
-  }
-  .c66 {
-
-​	width: 66%
-
-  }
-</style>
+<img src="../img/muti-cols.png">
 
 **A.  float+margin**
 
