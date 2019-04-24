@@ -96,8 +96,6 @@ function generateRandomAlphaNum(len) {
 }
 ```
 
---
-
 ### 12、打乱数字数组的顺序
 
 ```js
@@ -579,8 +577,6 @@ var addFive = addGenerator(5);
 console.log(addFive(4));//输出9
 
 ```
-
---
 
 ### 47、使用匿名函数来隐藏全局作用域变量
 
